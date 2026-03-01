@@ -90,10 +90,12 @@ and then restart with: `sudo systemctl daemon-reload && sudo systemctl restart o
 Before starting the app, you need to configure the following variables in your `.env` file:
 
 ```sh
-VITE_BACKEND_URL=http://192.168.0.1:4567
-VITE_WEBSOCKET_URL=ws://192.168.0.1:4567
-VITE_OLLAMA_URL=http://192.168.0.1:11434
+VITE_BACKEND_URL=http://192.168.XXX.XXX:4567
+VITE_WEBSOCKET_URL=ws://192.168.XXX.XXX:4567
+VITE_OLLAMA_URL=http://192.168.XXX.XXX:11434
 ```
+
+Replace with the local IP addresses of your servers.
 
 The first two variables use the same address since the WebSocket app also runs on Sinatra. If your Ollama instance is running on a different device, you'll need to specify its network address.
 
