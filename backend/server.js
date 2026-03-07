@@ -78,7 +78,8 @@ process.on('exit', cleanup);
 process.on('SIGTERM', () => { cleanup(); process.exit(0); });
 process.on('SIGINT', () => { cleanup(); process.exit(0); });
 
-// Middleware
+// MARK: Middleware Setup
+
 app.use((_req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -90,7 +91,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.options('*', (_req, res) => res.sendStatus(200));
 
-// Routes
+// MARK: Main Routes
+
 app.get('/', (_req, res) => {
   res.json({ message: 'Express is ok' });
 });
@@ -205,12 +207,14 @@ app.post('/wake', (_req, res) => {
   res.json({ message: 'wake word received' });
 });
 
-// WebSocket connection handler
+// MARK: WebSocket Handler
 wss.on('connection', (ws) => {
   console.log('WebSocket opened');
   ws.on('message', (msg) => console.log(`Received message: ${msg}`));
   ws.on('close', () => console.log('WebSocket closed'));
 });
+
+// MARK: Server Listener
 
 // Dynamically load notions
 const notionsDir = path.join(__dirname, 'notions');
