@@ -27,7 +27,6 @@ If you don't want to replicate the exact box form factor, you can still run it a
 
 Ensure you have the following software installed before proceeding with the setup:
 
-* Ruby 3.3.0
 * Node 22
 * Python 3
 * Ollama
@@ -52,11 +51,10 @@ npm install
 
 ### 3. Install backend dependencies
 
-Navigate to the `backend/` directory and install the required Ruby and Python packages.
+Navigate to the `backend/` directory and install the required Python packages.
 
 ```sh
 cd backend/
-bundle install
 pip3 install -r requirements.txt
 ```
 
@@ -97,7 +95,7 @@ VITE_OLLAMA_URL=http://192.168.XXX.XXX:11434
 
 Replace with the local IP addresses of your servers.
 
-The first two variables use the same address since the WebSocket app also runs on Sinatra. If your Ollama instance is running on a different device, you'll need to specify its network address.
+The first two variables use the same address since the WebSocket app also runs on Express. If your Ollama instance is running on a different device, you'll need to specify its network address.
 
 By default the recording directory is `/dev/shm/whisper_recordings` if you're developing and running the project on a different OS you can change this in your env file e.g.
 
@@ -123,7 +121,7 @@ npm run dev-start
 ## Creating Tools
 
 Creating tools is as simple as making a JavaScript module in `src/tools/` that exports an object with four properties: the tool's **name**, the **parameters** passed to the function, a **describe** field, and the function's main **execution** body.
-Some frontend tools may require backend API handlers to fetch information from the Pi hardware (since the frontend cannot query it directly) and expose it via REST. I created a folder in `backend/notions/` where I placed all these Ruby Sinatra routes.
+Some frontend tools may require backend API handlers to fetch information from the Pi hardware (since the frontend cannot query it directly) and expose it via REST. I created a folder in `backend/notions/` where I placed all these Express routes.
 Take a look at what's already there to have an idea.
 
 _The tools with the `.txt` extension are provided for reference. If you want to import them into the agent, just rename the extension to `.js` or `.rb` for the backend ones._
@@ -151,17 +149,13 @@ If you consider certain tools to be dangerous and want additional confirmation b
 
 ## FAQ
 
-### Why Ruby + Python?
-
-Yes, I know, I should've made the whole backend layer in Python. It would've made more sense, but I didn't feel comfortable writing in Python since it's not my primary language, and I didn't want to just vibecode it.
-
 ### Why don't you use llama.cpp?
 
 I'm aware of Ollama's shady practices and the issues with [llama.cpp](https://github.com/ggml-org/llama.cpp)'s creator. Eventually, I will migrate, but for now it served its purpose for rapid prototyping my project. I've read it's even more performant, so yes, I'll definitely migrate (maybe).
 
 ### Why connecting the frontend directly to Ollama?
 
-I wanted the web app to be the most important part of the project, containing the logic of the actual Agent. I thought of using the Ruby+Python backend layer only for interacting with the Raspberry Pi hardware, it could easily be rewritten in a different stack and reconnected to the frontend if needed. Check the [architecture diagram here](https://blog.simone.computer/an-agent-desktoy#nothing-leaves-the-pi).
+I wanted the web app to be the most important part of the project, containing the logic of the actual Agent. I thought of using the Express+Python backend layer only for interacting with the Raspberry Pi hardware, it could easily be rewritten in a different stack and reconnected to the frontend if needed. Check the [architecture diagram here](https://blog.simone.computer/an-agent-desktoy#nothing-leaves-the-pi).
 
 ### Won't those useless animations slow down the LLM inference?
 
