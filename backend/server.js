@@ -87,6 +87,7 @@ app.use((_req, res, next) => {
   next();
 });
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.options('*', (_req, res) => res.sendStatus(200));
 
 // Routes
@@ -105,7 +106,7 @@ app.post('/speak', (req, res) => {
   res.json({ message: 'ok' });
 });
 
-app.post('/start_recording', (req, res) => {
+app.post('/start_recording', (_req, res) => {
   if (isRecording()) {
     return res.status(409).json({ error: 'Recording is already in progress.' });
   }
@@ -159,7 +160,7 @@ app.post('/start_recording', (req, res) => {
   }
 });
 
-app.post('/stop_recording', (req, res) => {
+app.post('/stop_recording', (_req, res) => {
   if (!isRecording()) {
     return res.status(400).json({ error: 'No recording is currently in progress.' });
   }
