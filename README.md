@@ -155,7 +155,9 @@ I'm aware of Ollama's shady practices and the issues with [llama.cpp](https://gi
 
 ### Why connecting the frontend directly to Ollama?
 
-I wanted the web app to be the most important part of the project, containing the logic of the actual Agent. I thought of using the Express+Python backend layer only for interacting with the Raspberry Pi hardware, it could easily be rewritten in a different stack and reconnected to the frontend if needed. Check the [architecture diagram here](https://blog.simone.computer/an-agent-desktoy#nothing-leaves-the-pi).
+I wanted the web app to be the most important part of the project, containing the logic of the actual Agent. I thought of using the Express+Python backend layer only for interacting with the Raspberry Pi hardware (e.g. microphone and transcribing services), it could easily be rewritten in a different stack and reconnected to the frontend if needed. Check the architecture diagram here:
+
+![arch diagram](readme_assets/arch-diagram.png)
 
 ### Won't those useless animations slow down the LLM inference?
 
