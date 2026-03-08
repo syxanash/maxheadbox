@@ -88,9 +88,9 @@ and then restart with: `sudo systemctl daemon-reload && sudo systemctl restart o
 Before starting the app, you need to configure the following variables in your `.env` file:
 
 ```sh
-VITE_BACKEND_HOST=192.168.XXX.XXX:4567
-VITE_WEBSOCKET_HOST=192.168.XXX.XXX:4567
-VITE_OLLAMA_HOST=192.168.XXX.XXX:11434
+VITE_BACKEND_URL=http://192.168.XXX.XXX:4567
+VITE_WEBSOCKET_URL=ws://192.168.XXX.XXX:4567
+VITE_OLLAMA_URL=http://192.168.XXX.XXX:11434
 ```
 
 Replace with the local IP addresses of your servers.
