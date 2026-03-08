@@ -175,6 +175,6 @@ Fantastic question, thanks for asking! Check out my [blog post](https://blog.sim
 ### Was this vibecoded?
 
 No, if the quality of the code is shite, it's entirely my doing, completely organic, don't worry.<br>
-Jokes aside, the only tools I've created using Copilot are `weather.rb` and `wiki.rb`, because I wanted something quick to test my Agent.
+Jokes aside, the only tools I've created using Copilot are `weather.js` and `wiki.js`, because I wanted something quick to test my Agent.
 
 _Dinner is ready. For any more questions, [my assistant](mailto:theassistant@simone.computer) will take it from here alternatively open a GitHub issue. Have a good night!_
