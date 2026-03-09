@@ -31,6 +31,10 @@ Ensure you have the following software installed before proceeding with the setu
 * Python 3
 * Ollama
 
+### Update 9/3/2026
+
+Ruby is no longer needed to run the project, the backend has been rewritten in **Express.js**
+
 ## Setup and Installation
 
 Follow these steps to get Max Headbox set up and ready to run.
