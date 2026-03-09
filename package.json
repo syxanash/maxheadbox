@@ -10,18 +10,22 @@
     "preview": "vite preview",
     "dev-start": "concurrently \"npm run dev\" \"npm run start-whisper-service\" \"npm run start-backend\"",
     "prod-start": "npm run build && concurrently \"npm run preview\" \"npm run start-whisper-service\" \"npm run start-backend\"",
-    "start-backend": "ruby backend/server.rb -o 0.0.0.0",
+    "start-backend": "node backend/server.js",
     "start-whisper-service": "uvicorn backend.whisper_service:app --host 0.0.0.0 --port 8000 --workers 2"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
     "concurrently": "^9.1.2",
+    "dotenv": "^16.0.0",
+    "express": "^4.21.0",
     "lodash": "^4.17.21",
+    "nodemailer": "^6.9.0",
     "ollama": "^0.5.16",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-markdown": "^10.1.0",
-    "streaming-json": "^0.1.4"
+    "streaming-json": "^0.1.4",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",

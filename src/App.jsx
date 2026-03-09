@@ -96,6 +96,8 @@ function App() {
     startScreensaverTimeout();
   }, [startScreensaverTimeout]);
 
+  // MARK: Process Convs cbk
+
   const processConversation = useCallback(async (userInput, inputRole = 'user') => {
     globalMessagesRef.current.push({ role: inputRole, content: userInput });
 
@@ -152,6 +154,8 @@ function App() {
     }
   }, [spawnListener]);
 
+  // MARK: Agent Request cbk
+
   const agentRequest = useCallback(async (userInput) => {
     setBackendResponse([]);
 
@@ -170,7 +174,7 @@ function App() {
 
     if (hasAskedPermissionRef.current) {
       hasAskedPermissionRef.current = false;
-      const userGaveConsent = /(yes|ok|yeah|sure|yep)/i.test(userInput);
+      const userGaveConsent = /(yes|ok|yeah|sure|yep|alright)/i.test(userInput);
 
       const recalledToolCall = JSON.parse(functionRecall.current);
       functionRecall.current = undefined;
@@ -287,10 +291,7 @@ function App() {
     }
   }, [processConversation]);
 
-  const stopStreaming = useCallback(() => {
-    ollama.abort();
-    console.info("Attempting to stop streaming...");
-  }, []);
+  // MARK: Start Recording cbk
 
   const handleStartRecording = useCallback(async () => {
     clearScreenSaverTimeout();
@@ -312,6 +313,8 @@ function App() {
       console.error("Error starting recording:", err);
     }
   }, [clearScreenSaverTimeout]);
+
+  // MARK: Initiate App cbk
 
   const initiateApp = useCallback(async () => {
     if (config.FULLSCREEN)
@@ -387,6 +390,13 @@ function App() {
     }
   }, [spawnListener]);
 
+  // MARK: App State MAP
+
+  const stopStreaming = useCallback(() => {
+    ollama.abort();
+    console.info("Attempting to stop streaming...");
+  }, []);
+
   const APP_STATE_MAP = useMemo(() => ({
     [APP_STATUS.RECORDING]: {
       ribbonClass: 'record',
@@ -432,6 +442,8 @@ function App() {
     return APP_STATE_MAP[appStatus]?.ribbonClass || '';
   }, [APP_STATE_MAP, appStatus]);
 
+  // MARK: Handle Tap cbk
+
   const handleClickAction = useCallback(() => {
     if (screenSaverTimeoutRef.current) {
       clearTimeout(screenSaverTimeoutRef.current);
@@ -449,6 +461,8 @@ function App() {
       onClickHandler();
     }
   }, [APP_STATE_MAP, appStatus]);
+
+  // MARK: WebSocket Effect
 
   useEffect(() => {
     const ws = new WebSocket(`${config.WEBSOCKET_URL}/ws`);
@@ -497,6 +511,8 @@ function App() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // MARK: Main Render
 
   const renderContent = useCallback(() => {
     if (showFace) {
