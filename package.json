@@ -18,7 +18,7 @@
     "concurrently": "^9.1.2",
     "dotenv": "^16.0.0",
     "express": "^4.21.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "nodemailer": "^8.0.2",
     "ollama": "^0.5.16",
     "react": "^19.1.0",
