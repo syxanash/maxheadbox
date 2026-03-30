@@ -17,7 +17,7 @@ const execution = async (parameter) => {
   const wikiData = await backendResponse.json();
   const wikiContent = wikiData.summary;
 
-  return `Here is wikipedia page for "${topic}": "${wikiContent}.`;
+  return `Here is wikipedia page for "${topic}": "${wikiContent}".`;
 };
 
 export default { name, params, description, execution };

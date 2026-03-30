@@ -73,6 +73,7 @@ function App() {
   }, []);
 
   const startScreensaverTimeout = useCallback(() => {
+    clearTimeout(screenSaverTimeoutRef.current);
     screenSaverTimeoutRef.current = setTimeout(() => {
       const randomFace = sample(['idle', 'sleepy']);
       setShowFace(true);
@@ -277,16 +278,16 @@ function App() {
     setAppStatus(APP_STATUS.THINKING);
 
     if (hasAskedPermissionRef.current) {
-      processConversation(cumulativeResult, 'user');
+      await processConversation(cumulativeResult, 'user');
     } else {
       if (toolResult === undefined) {
         setFace('reading');
-        processConversation(userInput, 'user');
+        await processConversation(userInput, 'user');
       } else {
         setFace('love');
         cumulativeResult = cumulativeResult || 'You executed no tasks';
         const conversationPrompt = `User asked: ${userInput}.\n${cumulativeResult}, communicate the results with the user.`;
-        processConversation(conversationPrompt, 'user');
+        await processConversation(conversationPrompt, 'user');
       }
     }
   }, [processConversation]);

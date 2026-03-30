@@ -16,17 +16,26 @@ export default function (app) {
   });
 
   app.post('/save-note', (req, res) => {
-    const note = req.body.note ?? req.query.note ?? '';
-    const dir = path.dirname(NOTES_FILE);
-    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-    appendFileSync(NOTES_FILE, note + '\n');
-    res.json({ message: 'successfully saved the note!' });
+    try {
+      const note = req.body.note ?? req.query.note ?? '';
+      const dir = path.dirname(NOTES_FILE);
+      if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+      appendFileSync(NOTES_FILE, note + '\n');
+      res.json({ message: 'successfully saved the note!' });
+    } catch (err) {
+      res.json({ error: `Failed to save note: ${err.message}` });
+    }
   });
 
   app.post('/clear-notes', (_req, res) => {
-    const dir = path.dirname(NOTES_FILE);
-    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-    truncateSync(NOTES_FILE, 0);
-    res.json({ message: 'Successfully cleared all notes!' });
+    try {
+      const dir = path.dirname(NOTES_FILE);
+      if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+      if (!existsSync(NOTES_FILE)) writeFileSync(NOTES_FILE, '');
+      truncateSync(NOTES_FILE, 0);
+      res.json({ message: 'Successfully cleared all notes!' });
+    } catch (err) {
+      res.json({ error: `Failed to clear notes: ${err.message}` });
+    }
   });
 }

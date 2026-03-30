@@ -29,7 +29,7 @@ function WordsContainer({ backendResponse, recordedMessage, reaction, finished }
       setMouth(getNewMouthPosition(mouth));
     }, 100);
 
-    return () => { clearTimeout(mouthTimeout); };
+    return () => { clearInterval(mouthTimeout); };
   }, [getNewMouthPosition, mouth]);
 
   useEffect(() => {
