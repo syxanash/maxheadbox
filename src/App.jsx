@@ -221,6 +221,8 @@ function App() {
         const functionName = toolContent?.function;
         const description = toolContent?.describe;
 
+        console.log(`📝 ${JSON.stringify(toolContent)}`);
+
         console.log(`🤖 Model wants to call: ${functionName}("${toolContent?.parameter}")`);
 
         setBackendResponse(prev => [...prev, `${toolLoopGuard}. ${description}...\n\n`]);
