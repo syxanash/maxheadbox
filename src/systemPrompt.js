@@ -5,7 +5,7 @@ const generateExamples = () => {
 
   return Object.values(toolsMap).map(tool => {
     if (tool.params === undefined) {
-      return `- ${tool.name}: ${tool.description}`;
+      return `- ${tool.name}(): ${tool.description} (no params needed)`;
     }
 
     return `- ${tool.name}(${tool.params}): ${tool.description}`;
@@ -31,15 +31,15 @@ ${generateExamples()}
 - finished: call this function with NO parameters when the user's goal is complete.
 
 Respond only with a valid JSON. Do not include comments, explanations, tabs, or extra spaces. You must always describe what function you're invoking for example:                                                                                                                                          
-{"function":"function_name","parameter":"parameter_value or Leave empty string '' if no parameters","describe":"describe your intent in three words"}`,
+{"describe":"describe the function invoked in three words","function":"function_name","parameter":"parameter_value or leave empty if no parameters"}`,
   format: {
     type: "object",
     properties: {
+      describe: { type: "string" },
       function: { type: "string" },
       parameter: { type: "string" },
-      describe: { type: "string" },
     },
-    required: ["function", "parameter", "describe"]
+    required: ["describe", "function", "parameter"]
   }
 };
 

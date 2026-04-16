@@ -219,7 +219,7 @@ function App() {
 
         const toolContent = JSON.parse(toolCallMessage.content);
         const functionName = toolContent?.function;
-        const description = toolContent?.describe;
+        const description = toolContent?.describe ?? 'doing stuff...';
 
         console.log(`📝 ${JSON.stringify(toolContent)}`);
 
