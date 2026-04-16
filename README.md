@@ -64,7 +64,7 @@ After [installing Ollama](https://ollama.com/download/linux), pull the necessary
 
 ```sh
 ollama pull gemma3:1b
-ollama pull qwen3:1.7b
+ollama pull gemma4:e2b
 ```
 
 In the settings select expose Ollama to the network:
